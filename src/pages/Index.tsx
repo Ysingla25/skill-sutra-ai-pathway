@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+<<<<<<< HEAD
 import HowItWorks from "@/components/HowItWorks";
+=======
+import { CareerChatbot } from "@/components/CareerChatbot";
+>>>>>>> 449cd624d80125a9ee8a277a139775dcc4141955
 
 const Index = () => {
   return (
@@ -125,6 +129,7 @@ const Index = () => {
       </div>
 
       <Footer />
+      <CareerChatbot />
     </div>
   );
 };
