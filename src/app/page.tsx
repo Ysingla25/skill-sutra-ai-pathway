@@ -4,14 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CareerChatbot } from "@/components/CareerChatbot";
 import { CareerQuiz } from "@/components/CareerQuiz";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false);
@@ -27,18 +20,12 @@ export default function Home() {
           
           <div className="flex justify-center gap-4">
             <Dialog>
-              <DialogTrigger asChild>
+              <DialogTrigger>
                 <Button size="lg" className="gap-2 text-lg px-8 py-6">
                   🎯 Take Career Quiz
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle>Career Path Quiz</DialogTitle>
-                  <DialogDescription>
-                    Answer a few questions to discover your ideal career path in technology.
-                  </DialogDescription>
-                </DialogHeader>
                 <CareerQuiz />
               </DialogContent>
             </Dialog>
