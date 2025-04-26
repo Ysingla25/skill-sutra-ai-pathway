@@ -70,6 +70,28 @@ const Courses = () => {
         description: "Build complete web applications with modern tools and frameworks."
       }
     ],
+    "Mobile Development": [
+      {
+        title: "iOS & Swift - The Complete iOS App Development Bootcamp",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/ios-13-app-development-bootcamp/",
+        rating: 4.8,
+        price: "$89.99",
+        duration: "55 hours",
+        level: "Beginner",
+        description: "Learn iOS app development from scratch using Swift and SwiftUI."
+      },
+      {
+        title: "Android App Development Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/android-app-development",
+        rating: 4.6,
+        price: "$49/month",
+        duration: "5 months",
+        level: "Intermediate",
+        description: "Master Android development using Kotlin and Android Studio."
+      }
+    ],
     "Data Science": [
       {
         title: "Python for Data Science and Machine Learning Bootcamp",
@@ -90,6 +112,28 @@ const Courses = () => {
         duration: "10 months",
         level: "Beginner",
         description: "Kickstart your career in data science & ML. No prior knowledge required."
+      }
+    ],
+    "Artificial Intelligence": [
+      {
+        title: "Deep Learning Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/deep-learning",
+        rating: 4.9,
+        price: "$49/month",
+        duration: "5 months",
+        level: "Advanced",
+        description: "Master deep learning fundamentals with Andrew Ng. Build neural networks and AI systems."
+      },
+      {
+        title: "Complete Machine Learning & AI Bootcamp",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/complete-machine-learning-and-artificial-intelligence-bootcamp/",
+        rating: 4.7,
+        price: "$89.99",
+        duration: "45 hours",
+        level: "Intermediate",
+        description: "Learn machine learning, deep learning, and artificial intelligence from scratch."
       }
     ],
     "UX Design": [
@@ -114,6 +158,50 @@ const Courses = () => {
         description: "Master UX/UI design principles and create stunning user interfaces."
       }
     ],
+    "Cloud Computing": [
+      {
+        title: "AWS Certified Solutions Architect",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/",
+        rating: 4.8,
+        price: "$89.99",
+        duration: "27 hours",
+        level: "Intermediate",
+        description: "Prepare for AWS Solutions Architect certification with hands-on practice."
+      },
+      {
+        title: "Google Cloud Platform Fundamentals",
+        platform: "Coursera",
+        url: "https://www.coursera.org/professional-certificates/cloud-engineering-gcp",
+        rating: 4.7,
+        price: "$49/month",
+        duration: "6 months",
+        level: "Beginner",
+        description: "Start your cloud computing career with Google Cloud Platform."
+      }
+    ],
+    "Cybersecurity": [
+      {
+        title: "CompTIA Security+ Certification",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/securityplus/",
+        rating: 4.8,
+        price: "$89.99",
+        duration: "24 hours",
+        level: "Intermediate",
+        description: "Comprehensive security training for the CompTIA Security+ certification."
+      },
+      {
+        title: "IBM Cybersecurity Analyst Professional Certificate",
+        platform: "Coursera",
+        url: "https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst",
+        rating: 4.6,
+        price: "$49/month",
+        duration: "8 months",
+        level: "Beginner",
+        description: "Start your career in cybersecurity with IBM's professional certificate."
+      }
+    ],
     "Product Management": [
       {
         title: "Digital Product Management Specialization",
@@ -135,6 +223,28 @@ const Courses = () => {
         level: "Beginner",
         description: "Complete product management course covering strategy to execution."
       }
+    ],
+    "Digital Marketing": [
+      {
+        title: "Digital Marketing Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/digital-marketing",
+        rating: 4.7,
+        price: "$49/month",
+        duration: "8 months",
+        level: "Beginner",
+        description: "Master digital marketing strategies, SEO, social media, and analytics."
+      },
+      {
+        title: "The Complete Digital Marketing Course",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/learn-digital-marketing-course/",
+        rating: 4.5,
+        price: "$84.99",
+        duration: "22.5 hours",
+        level: "Beginner",
+        description: "12 courses in 1 - SEO, social media, email, ads, and content marketing."
+      }
     ]
   };
 
@@ -142,17 +252,19 @@ const Courses = () => {
     <div className="container mx-auto py-10 relative">
       <h1 className="text-4xl font-bold mb-8 text-center">Explore Our Courses</h1>
       <Tabs defaultValue="Web Development" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 mb-8">
+        <TabsList className="flex w-full overflow-x-auto p-1 mb-8 bg-gray-100 rounded-lg gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 w-full">
           {Object.keys(courses).map((category) => (
             <TabsTrigger key={category} value={category} className="text-lg">
               {category}
             </TabsTrigger>
           ))}
+          </div>
         </TabsList>
 
         {Object.entries(courses).map(([category, categoryCourses]) => (
           <TabsContent key={category} value={category}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {categoryCourses.map((course, index) => (
                 <Card key={index} className="overflow-hidden">
                   <CardHeader className="p-4">
