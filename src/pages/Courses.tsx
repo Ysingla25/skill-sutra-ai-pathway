@@ -252,19 +252,25 @@ const Courses = () => {
     <div className="container mx-auto py-10 relative">
       <h1 className="text-4xl font-bold mb-8 text-center">Explore Our Courses</h1>
       <Tabs defaultValue="Web Development" className="w-full">
-        <TabsList className="flex w-full overflow-x-auto p-1 mb-8 bg-gray-100 rounded-lg gap-2">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 w-full">
-          {Object.keys(courses).map((category) => (
-            <TabsTrigger key={category} value={category} className="text-lg">
-              {category}
-            </TabsTrigger>
-          ))}
-          </div>
-        </TabsList>
+        <div className="relative mb-8 border rounded-lg overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10" />
+          <TabsList className="flex w-full overflow-x-auto scrollbar-hide p-2 gap-2 bg-gray-50">
+            {Object.keys(courses).map((category) => (
+              <TabsTrigger 
+                key={category} 
+                value={category} 
+                className="flex-none px-4 py-2 text-sm whitespace-nowrap hover:bg-gray-100 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 rounded-md transition-all"
+              >
+                {category}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
 
         {Object.entries(courses).map(([category, categoryCourses]) => (
           <TabsContent key={category} value={category}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {categoryCourses.map((course, index) => (
                 <Card key={index} className="overflow-hidden">
                   <CardHeader className="p-4">
