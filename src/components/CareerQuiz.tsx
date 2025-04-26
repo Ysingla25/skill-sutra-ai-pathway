@@ -14,13 +14,107 @@ interface QuizQuestion {
   }[];
 }
 
+interface Course {
+  title: string;
+  platform: 'Udemy' | 'Coursera' | 'edX' | 'LinkedIn Learning';
+  url: string;
+  rating: number;
+  price: string;
+  duration: string;
+  level: 'Beginner' | 'Intermediate' | 'Advanced';
+}
+
 interface CareerPathScore {
   path: string;
   score: number;
   description: string;
   keySkills: string[];
   nextSteps: string[];
+  recommendedCourses: Course[];
 }
+
+const courseRecommendations: Record<string, Course[]> = {
+  'Data Science': [
+    {
+      title: 'Python for Data Science and Machine Learning Bootcamp',
+      platform: 'Udemy',
+      url: 'https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/',
+      rating: 4.6,
+      price: '$84.99',
+      duration: '25 hours',
+      level: 'Intermediate'
+    },
+    {
+      title: 'IBM Data Science Professional Certificate',
+      platform: 'Coursera',
+      url: 'https://www.coursera.org/professional-certificates/ibm-data-science',
+      rating: 4.8,
+      price: '$39/month',
+      duration: '10 months',
+      level: 'Beginner'
+    }
+  ],
+  'Web Development': [
+    {
+      title: 'The Complete 2024 Web Development Bootcamp',
+      platform: 'Udemy',
+      url: 'https://www.udemy.com/course/the-complete-web-development-bootcamp/',
+      rating: 4.7,
+      price: '$89.99',
+      duration: '55 hours',
+      level: 'Beginner'
+    },
+    {
+      title: 'Full-Stack Web Development with React',
+      platform: 'Coursera',
+      url: 'https://www.coursera.org/specializations/full-stack-react',
+      rating: 4.7,
+      price: '$49/month',
+      duration: '5 months',
+      level: 'Intermediate'
+    }
+  ],
+  'Digital Marketing': [
+    {
+      title: 'Digital Marketing Specialization',
+      platform: 'Coursera',
+      url: 'https://www.coursera.org/specializations/digital-marketing',
+      rating: 4.6,
+      price: '$49/month',
+      duration: '8 months',
+      level: 'Beginner'
+    },
+    {
+      title: 'The Complete Digital Marketing Course',
+      platform: 'Udemy',
+      url: 'https://www.udemy.com/course/learn-digital-marketing-course/',
+      rating: 4.5,
+      price: '$84.99',
+      duration: '22.5 hours',
+      level: 'Beginner'
+    }
+  ],
+  'UX Design': [
+    {
+      title: 'Google UX Design Professional Certificate',
+      platform: 'Coursera',
+      url: 'https://www.coursera.org/professional-certificates/google-ux-design',
+      rating: 4.8,
+      price: '$39/month',
+      duration: '6 months',
+      level: 'Beginner'
+    },
+    {
+      title: 'User Experience Design Essentials',
+      platform: 'Udemy',
+      url: 'https://www.udemy.com/course/ui-ux-web-design-using-adobe-xd/',
+      rating: 4.7,
+      price: '$84.99',
+      duration: '13 hours',
+      level: 'Beginner'
+    }
+  ]
+};
 
 const quizQuestions: QuizQuestion[] = [
   {
@@ -135,62 +229,98 @@ const quizQuestions: QuizQuestion[] = [
   }
 ];
 
-const careerPaths: Record<string, CareerPathScore> = {
+const careerPaths: Record<string, Omit<CareerPathScore, 'score'>> = {
   "Software Development": {
     path: "Software Development",
-    score: 0,
-    description: "Focus on building applications and systems using programming languages and development tools.",
-    keySkills: [
-      "Programming languages (e.g., JavaScript, Python)",
-      "Problem-solving",
-      "Software architecture",
-      "Version control",
-      "Testing methodologies"
-    ],
+    description: "A career in software development involves creating, testing, and maintaining applications and systems. You'll work with various programming languages and technologies to solve complex problems.",
+    keySkills: ["Programming", "Problem Solving", "System Design", "Version Control", "Testing"],
     nextSteps: [
-      "Learn fundamental programming concepts",
+      "Learn a programming language (Python, JavaScript, Java)",
       "Build a portfolio of projects",
       "Contribute to open source",
-      "Practice coding challenges",
-      "Join developer communities"
+      "Practice coding challenges"
+    ],
+    recommendedCourses: [
+      {
+        title: "The Complete Web Development Bootcamp",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/the-complete-web-development-bootcamp/",
+        rating: 4.7,
+        price: "$89.99",
+        duration: "55 hours",
+        level: "Beginner"
+      },
+      {
+        title: "Full-Stack Web Development with React",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/full-stack-react",
+        rating: 4.7,
+        price: "$49/month",
+        duration: "5 months",
+        level: "Intermediate"
+      }
     ]
   },
   "UX/UI Design": {
     path: "UX/UI Design",
-    score: 0,
-    description: "Create user-friendly interfaces and experiences that delight users while meeting business goals.",
-    keySkills: [
-      "User research",
-      "Interface design",
-      "Prototyping",
-      "Visual design",
-      "User testing"
-    ],
+    description: "UX/UI designers create intuitive and visually appealing interfaces for digital products. You'll combine creativity with user psychology to design engaging experiences.",
+    keySkills: ["User Research", "Wireframing", "Prototyping", "Visual Design", "User Testing"],
     nextSteps: [
-      "Learn design principles",
-      "Master design tools",
-      "Build a design portfolio",
+      "Learn design tools (Figma, Adobe XD)",
       "Study user psychology",
+      "Create a design portfolio",
       "Practice user research"
+    ],
+    recommendedCourses: [
+      {
+        title: "Google UX Design Professional Certificate",
+        platform: "Coursera",
+        url: "https://www.coursera.org/professional-certificates/google-ux-design",
+        rating: 4.8,
+        price: "$39/month",
+        duration: "6 months",
+        level: "Beginner"
+      },
+      {
+        title: "User Experience Design Essentials",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/ui-ux-web-design-using-adobe-xd/",
+        rating: 4.7,
+        price: "$84.99",
+        duration: "13 hours",
+        level: "Beginner"
+      }
     ]
   },
   "Product Management": {
     path: "Product Management",
-    score: 0,
-    description: "Bridge technical and business needs to guide product development and strategy.",
-    keySkills: [
-      "Strategic thinking",
-      "User empathy",
-      "Data analysis",
-      "Communication",
-      "Project management"
-    ],
+    description: "Product managers guide the development of products from conception to launch. You'll work with various teams to ensure products meet user needs and business goals.",
+    keySkills: ["Strategy", "Leadership", "Analytics", "Communication", "Agile"],
     nextSteps: [
-      "Learn product development lifecycle",
-      "Study market research",
-      "Practice stakeholder management",
-      "Build analytical skills",
-      "Network with product managers"
+      "Learn product development frameworks",
+      "Study market analysis",
+      "Develop technical knowledge",
+      "Practice stakeholder management"
+    ],
+    recommendedCourses: [
+      {
+        title: "Digital Product Management Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/digital-product-management",
+        rating: 4.6,
+        price: "$49/month",
+        duration: "5 months",
+        level: "Intermediate"
+      },
+      {
+        title: "Product Management A-Z",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/product-management-a-z/",
+        rating: 4.5,
+        price: "$84.99",
+        duration: "13.5 hours",
+        level: "Beginner"
+      }
     ]
   }
 };
@@ -236,7 +366,7 @@ export const CareerQuiz = () => {
       } else if (path === "Product Management") {
         score = scores.business * 2 + scores.technical * 0.7 + scores.creative * 0.7;
       }
-      return { ...info, score };
+      return { ...info, score, recommendedCourses: courseRecommendations[path] || [] };
     });
 
     // Sort and get top paths
@@ -332,6 +462,57 @@ export const CareerQuiz = () => {
                       <li key={i}>{step}</li>
                     ))}
                   </ul>
+                </div>
+                <div className="mt-6">
+                  <h5 className="font-semibold mb-4">Recommended Courses:</h5>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {courseRecommendations[path.path]?.map((course, i) => (
+                      <Card key={i} className="overflow-hidden">
+                        <CardHeader className="p-4">
+                          <div className="flex items-center justify-between">
+                            <div className={`px-2 py-1 text-xs font-semibold rounded ${{
+                              'Udemy': 'bg-purple-100 text-purple-700',
+                              'Coursera': 'bg-blue-100 text-blue-700',
+                              'edX': 'bg-red-100 text-red-700',
+                              'LinkedIn Learning': 'bg-sky-100 text-sky-700'
+                            }[course.platform]}`}>
+                              {course.platform}
+                            </div>
+                            <div className="flex items-center">
+                              <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                              </svg>
+                              <span className="ml-1 text-sm font-medium">{course.rating}</span>
+                            </div>
+                          </div>
+                          <CardTitle className="text-base mt-3">{course.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-4 pt-0">
+                          <div className="flex justify-between items-center text-sm text-gray-600 mb-4">
+                            <span>{course.duration}</span>
+                            <span>{course.price}</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className={`text-xs font-medium px-2 py-1 rounded ${{
+                              'Beginner': 'bg-green-100 text-green-700',
+                              'Intermediate': 'bg-yellow-100 text-yellow-700',
+                              'Advanced': 'bg-red-100 text-red-700'
+                            }[course.level]}`}>
+                              {course.level}
+                            </span>
+                            <a 
+                              href={course.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-purple-600 hover:text-purple-700 font-medium text-sm"
+                            >
+                              Learn More →
+                            </a>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
