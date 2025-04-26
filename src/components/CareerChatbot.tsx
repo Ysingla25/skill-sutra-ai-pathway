@@ -127,7 +127,7 @@ const generateResponse = (question: string): string => {
   } else if (question.includes('growth') || question.includes('advance') || question.includes('promotion')) {
     return careerKnowledgeBase.growth;
   } else if (question.includes('balance') || question.includes('work-life') || question.includes('stress')) {
-    return careerKnowledgeBase."work-life";
+    return careerKnowledgeBase["work-life"];
   } else if (question.includes('change') || question.includes('switch') || question.includes('transition')) {
     return careerKnowledgeBase.change;
   } else if (question.includes('trend') || question.includes('future') || question.includes('demand')) {
