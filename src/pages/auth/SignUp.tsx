@@ -4,8 +4,9 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../firebaseconfig"; // adjust the path if needed
+import { auth, db } from "../../firebaseconfig"; // make sure db is exported from firebaseconfig
 import { createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore"; // Firestore imports
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +20,19 @@ const SignUp = () => {
     setLoading(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(userCredential.user, { displayName: name });
+      const user = userCredential.user;
+
+      // Update display name
+      await updateProfile(user, { displayName: name });
+
+      // Save user data to Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: name,
+        email: email,
+        createdAt: new Date()
+      });
+
       navigate("/dashboard");
     } catch (error: any) {
       console.error("Error signing up:", error.message);
@@ -33,7 +46,17 @@ const SignUp = () => {
     const provider = new GoogleAuthProvider();
     setLoading(true);
     try {
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Save user data to Firestore (if first time login or overwrite)
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: user.displayName,
+        email: user.email,
+        createdAt: new Date()
+      });
+
       navigate("/dashboard");
     } catch (error: any) {
       console.error("Error with Google sign up:", error.message);
