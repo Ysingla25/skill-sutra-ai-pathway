@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageCircle, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { MessageCircle, X, Send } from "lucide-react";
 
 interface Message {
   type: "user" | "bot";
@@ -101,28 +102,75 @@ const questions = [
   }
 ];
 
+const careerKnowledgeBase = {
+  "salary": "Salaries vary greatly by role, location, and experience. Entry-level tech roles typically start at $50-70k, while experienced professionals can earn $100k+. Senior roles and specialized positions can exceed $150k.",
+  "skills": "Key career skills include: technical expertise in your field, communication, problem-solving, adaptability, time management, and continuous learning. Soft skills are as important as technical skills.",
+  "education": "While formal education is valuable, many successful careers can be built through self-learning, bootcamps, or certifications. What matters most is your skills and portfolio.",
+  "interview": "Prepare for interviews by: researching the company, practicing common questions, preparing your own questions, showcasing your projects, and demonstrating both technical and soft skills.",
+  "growth": "Career growth comes from: continuous learning, taking on challenging projects, networking, mentorship, and staying updated with industry trends.",
+  "work-life": "Work-life balance varies by company and role. Many organizations offer flexible hours, remote work, and wellness programs. It's important to set boundaries and communicate your needs.",
+  "change": "Career changes are common. Key steps include: identifying transferable skills, learning new required skills, networking in your target field, and possibly starting with entry-level positions.",
+  "trends": "Current trending career fields include: AI/Machine Learning, Data Science, Cybersecurity, Cloud Computing, and Sustainable Technology. Stay updated with industry news and continuous learning."
+};
+
+const generateResponse = (question: string): string => {
+  question = question.toLowerCase();
+  
+  if (question.includes('salary') || question.includes('pay') || question.includes('earn')) {
+    return careerKnowledgeBase.salary;
+  } else if (question.includes('skill') || question.includes('learn')) {
+    return careerKnowledgeBase.skills;
+  } else if (question.includes('education') || question.includes('degree') || question.includes('study')) {
+    return careerKnowledgeBase.education;
+  } else if (question.includes('interview') || question.includes('hire')) {
+    return careerKnowledgeBase.interview;
+  } else if (question.includes('growth') || question.includes('advance') || question.includes('promotion')) {
+    return careerKnowledgeBase.growth;
+  } else if (question.includes('balance') || question.includes('work-life') || question.includes('stress')) {
+    return careerKnowledgeBase."work-life";
+  } else if (question.includes('change') || question.includes('switch') || question.includes('transition')) {
+    return careerKnowledgeBase.change;
+  } else if (question.includes('trend') || question.includes('future') || question.includes('demand')) {
+    return careerKnowledgeBase.trends;
+  }
+  
+  return "I understand you're asking about careers. Could you please be more specific about what you'd like to know? You can ask about salaries, skills needed, education requirements, interview tips, career growth, work-life balance, career changes, or industry trends.";
+};
+
 export const CareerChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [messages, setMessages] = useState<Message[]>([
-    { type: "bot", content: "Hi! I'm here to help you find your ideal career path. Ready to start?" },
+    { type: "bot", content: "Hi! I'm your career advisor. Ask me anything about careers, jobs, skills, or professional growth!" },
   ]);
+  const [inputValue, setInputValue] = useState("");
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleOptionClick = (option: string) => {
-    // Add user's response
-    setMessages((prev) => [...prev, { type: "user", content: option }]);
+  const handleSendMessage = () => {
+    if (!inputValue.trim()) return;
 
-    // Add bot's next question or conclusion
+    // Add user's message
+    const userMessage = { type: "user" as const, content: inputValue };
+    setMessages(prev => [...prev, userMessage]);
+
+    // Generate and add bot's response
+    const botResponse = generateResponse(inputValue);
     setTimeout(() => {
-      if (currentQuestion < questions.length - 1) {
-        setMessages((prev) => [
-          ...prev,
-          { type: "bot", content: questions[currentQuestion + 1].question },
-        ]);
-        setCurrentQuestion((prev) => prev + 1);
-      } else {
-        // Final recommendation
-        const recommendation = generateRecommendation(
+      setMessages(prev => [...prev, { type: "bot", content: botResponse }]);
+      
+      // Scroll to bottom
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      }
+    }, 500);
+
+    setInputValue("");
+  };
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
+    }
+  };
           messages.filter((m) => m.type === "user").map((m) => m.content)
         );
         setMessages((prev) => [...prev, { type: "bot", content: recommendation }]);
@@ -167,10 +215,10 @@ Ready to start? Check out our courses page for structured learning paths!`;
   };
 
   const resetChat = () => {
-    setCurrentQuestion(0);
     setMessages([
-      { type: "bot", content: "Hi! I'm here to help you find your ideal career path. Ready to start?" },
+      { type: "bot", content: "Hi! I'm your career advisor. Ask me anything about careers, jobs, skills, or professional growth!" },
     ]);
+    setInputValue("");
   };
 
   return (
@@ -194,7 +242,7 @@ Ready to start? Check out our courses page for structured learning paths!`;
             </Button>
           </div>
           <CardContent className="p-4 overflow-hidden flex flex-col h-[500px]">
-            <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 scrollbar-thin">
+            <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 scrollbar-thin" ref={chatContainerRef}>
               {messages.map((message, index) => (
                 <div
                   key={index}
@@ -213,19 +261,22 @@ Ready to start? Check out our courses page for structured learning paths!`;
               ))}
             </div>
 
-            {/* Options */}
-            {currentQuestion < questions.length && messages[messages.length - 1].type === "bot" && (
-                <div className="space-y-2 sticky bottom-0 bg-background pt-2 border-t">
-                  {questions[currentQuestion].options.map((option) => (
-                    <Button
-                      key={option}
-                      variant="outline"
-                      className="w-full justify-start text-sm py-2 px-3 h-auto whitespace-normal text-left"
-                      onClick={() => handleOptionClick(option)}
-                    >
-                      {option}
-                    </Button>
-                  ))}
+            {/* Input area */}
+            <div className="flex items-center gap-2 sticky bottom-0 bg-background pt-2 border-t">
+              <Input
+                placeholder="Ask me anything about careers..."
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className="flex-1"
+              />
+              <Button
+                size="icon"
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim()}
+              >
+                <Send className="h-4 w-4" />
+              </Button>
                 </div>
               )}
 
