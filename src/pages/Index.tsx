@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HowItWorks from "@/components/HowItWorks";
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
@@ -79,25 +81,49 @@ const Index = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-purple-600">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            <span className="block">Ready to boost your career?</span>
-            <span className="block text-purple-200">Join SkillSutra today.</span>
-          </h2>
-          <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-            <div className="inline-flex rounded-md shadow">
-              <Link to="/auth/signup">
-                <Button className="bg-white text-purple-600 hover:bg-purple-50">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+      {/* How It Works Section */}
+      <div className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              How It Works
+            </h2>
+            <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+              Simple steps to transform your career journey
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+            {/* Step 1 */}
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <div className="text-4xl font-bold text-purple-600 mb-4">1</div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Get Started</h3>
+              <p className="text-gray-600">
+                Create your profile and share your career aspirations
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <div className="text-4xl font-bold text-purple-600 mb-4">2</div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">AI Analysis</h3>
+              <p className="text-gray-600">
+                Our AI analyzes your skills and market trends
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <div className="text-4xl font-bold text-purple-600 mb-4">3</div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Personalized Path</h3>
+              <p className="text-gray-600">
+                Get a tailored career development plan
+              </p>
             </div>
           </div>
         </div>
       </div>
+
       <Footer />
     </div>
   );
