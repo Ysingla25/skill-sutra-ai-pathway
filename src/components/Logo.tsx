@@ -20,55 +20,57 @@ export const Logo = ({ className, size = "md" }: LogoProps) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Brain + Path Symbol */}
-        <path
-          d="M32 8C19.85 8 10 17.85 10 30c0 9.577 6.158 17.712 14.72 20.622.982.334 2.063-.17 2.397-1.152.334-.982-.17-2.063-1.152-2.397C19.17 44.58 14 37.83 14 30c0-9.925 8.075-18 18-18s18 8.075 18 18c0 7.83-5.17 14.58-12.965 17.073-.982.334-1.486 1.415-1.152 2.397.334.982 1.415 1.486 2.397 1.152C46.842 47.712 53 39.577 53 30c0-12.15-9.85-22-21-22z"
-          fill="url(#gradient1)"
-        />
-        {/* Ascending Steps */}
-        <path
-          d="M26 40v-8h4v4h4v4h4v4h-12z"
-          fill="url(#gradient2)"
-        />
-        {/* Meditation Lotus */}
+        {/* Outer Circle - Skill Progress */}
         <circle
           cx="32"
-          cy="28"
-          r="6"
-          fill="url(#gradient3)"
+          cy="32"
+          r="28"
+          strokeWidth="4"
+          className="stroke-purple-100"
         />
+        <path
+          d="M32 4A28 28 0 0 1 60 32"
+          strokeWidth="4"
+          strokeLinecap="round"
+          className="stroke-purple-600"
+        />
+
+        {/* Star Points - Mastery */}
+        <path
+          d="M32 12L35.5 25.5L45 20L38 32L45 44L35.5 38.5L32 52L28.5 38.5L19 44L26 32L19 20L28.5 25.5L32 12Z"
+          fill="url(#starGradient)"
+        />
+
+        {/* Central Circle - Focus */}
+        <circle
+          cx="32"
+          cy="32"
+          r="6"
+          fill="url(#centerGradient)"
+          className="animate-pulse"
+        />
+
         <defs>
           <linearGradient
-            id="gradient1"
-            x1="10"
-            y1="8"
-            x2="53"
-            y2="50"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#7C3AED" />
-            <stop offset="1" stopColor="#6D28D9" />
-          </linearGradient>
-          <linearGradient
-            id="gradient2"
-            x1="26"
-            y1="32"
-            x2="38"
-            y2="44"
+            id="starGradient"
+            x1="19"
+            y1="12"
+            x2="45"
+            y2="52"
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#8B5CF6" />
-            <stop offset="1" stopColor="#7C3AED" />
+            <stop offset="1" stopColor="#6D28D9" />
           </linearGradient>
           <linearGradient
-            id="gradient3"
+            id="centerGradient"
             x1="26"
-            y1="22"
+            y1="26"
             x2="38"
-            y2="34"
+            y2="38"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#A78BFA" />
+            <stop stopColor="#C4B5FD" />
             <stop offset="1" stopColor="#8B5CF6" />
           </linearGradient>
         </defs>
