@@ -9,99 +9,6 @@ interface Message {
   content: string;
 }
 
-interface CareerPath {
-  title: string;
-  description: string;
-  requiredSkills: string[];
-  learningPath: string[];
-  estimatedTime: {
-    beginner: string;
-    intermediate: string;
-    advanced: string;
-  };
-}
-
-const careerPaths: Record<string, CareerPath> = {
-  "Frontend Development": {
-    title: "Frontend Development",
-    description: "Create beautiful and interactive user interfaces",
-    requiredSkills: ["HTML", "CSS", "JavaScript", "React", "UI/UX Design"],
-    learningPath: [
-      "HTML & CSS Fundamentals",
-      "JavaScript Basics & Advanced Concepts",
-      "React.js Framework",
-      "UI/UX Design Principles",
-      "Web Performance Optimization"
-    ],
-    estimatedTime: {
-      beginner: "6-8 months",
-      intermediate: "4-6 months",
-      advanced: "2-3 months"
-    }
-  },
-  "Backend Development": {
-    title: "Backend Development",
-    description: "Build robust server-side applications and APIs",
-    requiredSkills: ["Node.js", "Databases", "API Design", "Server Management", "Security"],
-    learningPath: [
-      "Server-side Programming",
-      "Database Design & Management",
-      "RESTful API Development",
-      "Authentication & Authorization",
-      "Cloud Services & Deployment"
-    ],
-    estimatedTime: {
-      beginner: "8-10 months",
-      intermediate: "5-7 months",
-      advanced: "3-4 months"
-    }
-  },
-  "Full Stack Development": {
-    title: "Full Stack Development",
-    description: "Master both frontend and backend development",
-    requiredSkills: ["Frontend Skills", "Backend Skills", "Database Management", "DevOps", "System Design"],
-    learningPath: [
-      "Frontend Development Basics",
-      "Backend Development Fundamentals",
-      "Database Integration",
-      "Full Stack Project Development",
-      "Deployment & DevOps"
-    ],
-    estimatedTime: {
-      beginner: "12-14 months",
-      intermediate: "8-10 months",
-      advanced: "5-6 months"
-    }
-  }
-};
-
-const questions = [
-  {
-    id: 1,
-    question: "What interests you more?",
-    options: ["Frontend Development", "Backend Development", "Full Stack Development"],
-    followUp: "Great choice! Frontend development focuses on creating user interfaces that users love to interact with."
-  },
-  {
-    id: 2,
-    question: "What is your current experience level?",
-    options: ["Beginner", "Intermediate", "Advanced"],
-    followUp: "Understanding your experience level helps us tailor the perfect learning path for you."
-  },
-  {
-    id: 3,
-    question: "How much time can you dedicate to learning?",
-    options: ["2-4 hours/day", "4-6 hours/day", "6+ hours/day"],
-    followUp: "Consistent learning is key to success in tech. We'll adjust the pace accordingly."
-  },
-  {
-    id: 4,
-    question: "What's your primary motivation for learning?",
-    options: ["Career Change", "Skill Enhancement", "Personal Interest"],
-    followUp: "Understanding your goals helps us provide more relevant guidance."
-  }
-];
-
 const careerKnowledgeBase = {
   "salary": "Salaries vary greatly by role, location, and experience. Entry-level tech roles typically start at $50-70k, while experienced professionals can earn $100k+. Senior roles and specialized positions can exceed $150k.",
   "skills": "Key career skills include: technical expertise in your field, communication, problem-solving, adaptability, time management, and continuous learning. Soft skills are as important as technical skills.",
@@ -171,48 +78,6 @@ export const CareerChatbot = () => {
       handleSendMessage();
     }
   };
-          messages.filter((m) => m.type === "user").map((m) => m.content)
-        );
-        setMessages((prev) => [...prev, { type: "bot", content: recommendation }]);
-      }
-    }, 500);
-  };
-
-  const generateRecommendation = (answers: string[]) => {
-    const [interest, level, time, motivation] = answers;
-    const careerPath = careerPaths[interest];
-    const timeCommitment = time.split('-')[0];
-    const hoursPerWeek = parseInt(timeCommitment) * 5; // Assuming 5 days/week
-
-    let completionTime = careerPath.estimatedTime[level.toLowerCase() as keyof typeof careerPath.estimatedTime];
-    
-    // Adjust completion time based on daily commitment
-    if (time === "6+ hours/day") {
-      completionTime = completionTime.split('-')[0] + " (accelerated)";
-    }
-
-    return `Based on your responses, here's your personalized career path in ${interest}:
-
-🎯 Career Focus: ${careerPath.description}
-
-📚 Required Skills:
-${careerPath.requiredSkills.map(skill => `• ${skill}`).join('\n')}
-
-🛣️ Your Learning Path:
-${careerPath.learningPath.map((step, index) => `${index + 1}. ${step}`).join('\n')}
-
-⏱️ Estimated Completion Time: ${completionTime}
-(Based on ${time} commitment, ${hoursPerWeek}+ hours/week)
-
-💡 Additional Tips:
-• ${motivation === 'Career Change' ? 'Focus on building a strong portfolio of projects' : 
-    motivation === 'Skill Enhancement' ? 'Consider specializing in advanced topics in your area' : 
-    'Explore side projects that interest you'}
-• Join our community to connect with other learners
-• Regular practice and real-world projects are key to success
-
-Ready to start? Check out our courses page for structured learning paths!`;
-  };
 
   const resetChat = () => {
     setMessages([
@@ -277,15 +142,12 @@ Ready to start? Check out our courses page for structured learning paths!`;
               >
                 <Send className="h-4 w-4" />
               </Button>
-                </div>
-              )}
+            </div>
 
             {/* Reset button */}
-            {currentQuestion >= questions.length && (
-              <Button className="w-full mt-4" onClick={resetChat}>
-                Start Over
-              </Button>
-            )}
+            <Button className="w-full mt-4" onClick={resetChat}>
+              Start Over
+            </Button>
           </CardContent>
         </Card>
       )}
