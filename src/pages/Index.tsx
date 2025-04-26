@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Target } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CareerChatbot } from "@/components/CareerChatbot";
+import { CareerQuiz } from "@/components/CareerQuiz";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Index = () => {
   return (
@@ -23,7 +25,7 @@ const Index = () => {
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                   Discover your perfect career path with personalized AI guidance. Get expert insights, learn in-demand skills, and navigate your professional journey with confidence.
                 </p>
-                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
                   <div className="rounded-md shadow">
                     <Link to="/auth/signup">
                       <Button className="w-full flex items-center justify-center px-8 py-3 bg-purple-600 hover:bg-purple-700">
@@ -31,6 +33,21 @@ const Index = () => {
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </Link>
+                  </div>
+                  <div className="rounded-md shadow mt-3 sm:mt-0">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button 
+                          className="w-full flex items-center justify-center px-8 py-3 bg-white text-purple-600 hover:bg-purple-50 border-2 border-purple-600"
+                        >
+                          Take Career Quiz
+                          <Target className="ml-2 h-4 w-4" />
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                        <CareerQuiz />
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
               </div>
