@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { CareerChatbot } from "@/components/CareerChatbot";
 
 const Index = () => {
   return (
@@ -99,6 +100,7 @@ const Index = () => {
         </div>
       </div>
       <Footer />
+      <CareerChatbot />
     </div>
   );
 };
