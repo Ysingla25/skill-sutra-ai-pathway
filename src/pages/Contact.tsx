@@ -14,12 +14,12 @@ const Contact = () => {
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Phone",
-      details: "+1 (555) 123-4567",
+      details: "+91 8934678723",
     },
     {
       icon: <MapPin className="h-6 w-6" />,
       title: "Address",
-      details: "123 Learning Street, Education City, 12345",
+      details: "Urban Estate Phase II, Near Aneja's, Patiala, 147002",
     },
   ];
 
