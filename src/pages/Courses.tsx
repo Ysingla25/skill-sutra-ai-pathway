@@ -48,6 +48,38 @@ const EnrollmentForm = ({ onClose }: { onClose: () => void }) => {
 
 const Courses = () => {
   const courses = {
+    "Popular": [
+      {
+        title: "100 Days of Code: The Complete Python Pro Bootcamp",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/100-days-of-code/",
+        rating: 4.7,
+        price: "$89.99",
+        duration: "60 hours",
+        level: "Beginner",
+        description: "Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps!"
+      },
+      {
+        title: "Meta Front-End Developer Professional Certificate",
+        platform: "Coursera",
+        url: "https://www.coursera.org/professional-certificates/meta-front-end-developer",
+        rating: 4.8,
+        price: "$49/month",
+        duration: "7 months",
+        level: "Beginner",
+        description: "Launch your career as a front-end developer. Build job-ready skills for an in-demand career and earn a credential from Meta."
+      },
+      {
+        title: "AWS Cloud Practitioner Essentials",
+        platform: "edX",
+        url: "https://www.edx.org/learn/aws/amazon-web-services-aws-cloud-practitioner-essentials",
+        rating: 4.7,
+        price: "Free",
+        duration: "6 weeks",
+        level: "Beginner",
+        description: "Learn the fundamentals of cloud computing and AWS, preparing you for the AWS Cloud Practitioner certification."
+      }
+    ],
     "Web Development": [
       {
         title: "The Complete 2024 Web Development Bootcamp",
@@ -68,6 +100,36 @@ const Courses = () => {
         duration: "5 months",
         level: "Intermediate",
         description: "Build complete web applications with modern tools and frameworks."
+      },
+      {
+        title: "The Complete JavaScript Course 2024",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/the-complete-javascript-course/",
+        rating: 4.8,
+        price: "$89.99",
+        duration: "69 hours",
+        level: "Beginner",
+        description: "Master JavaScript with projects, challenges and theory. From fundamentals to advanced topics."
+      },
+      {
+        title: "Next.js & React - The Complete Guide",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/nextjs-react-the-complete-guide/",
+        rating: 4.8,
+        price: "$89.99",
+        duration: "25 hours",
+        level: "Intermediate",
+        description: "Learn Next.js from the ground up and build production-ready, fullstack React applications."
+      },
+      {
+        title: "Vue - The Complete Guide",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/vuejs-2-the-complete-guide/",
+        rating: 4.7,
+        price: "$89.99",
+        duration: "32 hours",
+        level: "Intermediate",
+        description: "Master Vue.js with the most complete course on Vue on Udemy. Includes Vuex, Composition API, and more."
       }
     ],
     "Mobile Development": [
@@ -90,6 +152,36 @@ const Courses = () => {
         duration: "5 months",
         level: "Intermediate",
         description: "Master Android development using Kotlin and Android Studio."
+      },
+      {
+        title: "React Native - The Practical Guide",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/react-native-the-practical-guide/",
+        rating: 4.7,
+        price: "$89.99",
+        duration: "28.5 hours",
+        level: "Intermediate",
+        description: "Build native mobile apps for iOS and Android using React Native. Includes hooks, Redux, and more."
+      },
+      {
+        title: "Flutter & Dart - The Complete Guide",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/",
+        rating: 4.6,
+        price: "$89.99",
+        duration: "42 hours",
+        level: "Beginner",
+        description: "Learn Flutter and Dart from scratch, build adaptive and beautiful apps for iOS and Android."
+      },
+      {
+        title: "SwiftUI Masterclass",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/swiftui-masterclass-course-ios-development-with-swift/",
+        rating: 4.8,
+        price: "$89.99",
+        duration: "28 hours",
+        level: "Intermediate",
+        description: "Learn iOS 15 app development with SwiftUI 3 and build beautiful, professional iOS apps."
       }
     ],
     "Data Science": [
@@ -112,6 +204,36 @@ const Courses = () => {
         duration: "10 months",
         level: "Beginner",
         description: "Kickstart your career in data science & ML. No prior knowledge required."
+      },
+      {
+        title: "Data Science: R Basics",
+        platform: "edX",
+        url: "https://www.edx.org/learn/r-programming/harvard-university-data-science-r-basics",
+        rating: 4.7,
+        price: "Free",
+        duration: "8 weeks",
+        level: "Beginner",
+        description: "Learn R programming and data science basics from Harvard University."
+      },
+      {
+        title: "Data Science Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/jhu-data-science",
+        rating: 4.5,
+        price: "$49/month",
+        duration: "11 months",
+        level: "Intermediate",
+        description: "Master data science with R programming. Build a data science toolkit with Johns Hopkins."
+      },
+      {
+        title: "Statistics for Data Science",
+        platform: "LinkedIn Learning",
+        url: "https://www.linkedin.com/learning/statistics-for-data-science",
+        rating: 4.6,
+        price: "$29.99",
+        duration: "6 hours",
+        level: "Intermediate",
+        description: "Learn essential statistics concepts for data science and machine learning."
       }
     ],
     "Artificial Intelligence": [
@@ -134,6 +256,36 @@ const Courses = () => {
         duration: "45 hours",
         level: "Intermediate",
         description: "Learn machine learning, deep learning, and artificial intelligence from scratch."
+      },
+      {
+        title: "TensorFlow Developer Professional Certificate",
+        platform: "Coursera",
+        url: "https://www.coursera.org/professional-certificates/tensorflow-in-practice",
+        rating: 4.8,
+        price: "$49/month",
+        duration: "4 months",
+        level: "Intermediate",
+        description: "Learn TensorFlow from Google experts and build production-ready deep learning models."
+      },
+      {
+        title: "Natural Language Processing Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/natural-language-processing",
+        rating: 4.7,
+        price: "$49/month",
+        duration: "4 months",
+        level: "Advanced",
+        description: "Build natural language processing systems using PyTorch and transformers."
+      },
+      {
+        title: "Computer Vision - The Complete Guide",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/computer-vision-the-complete-guide/",
+        rating: 4.6,
+        price: "$89.99",
+        duration: "22 hours",
+        level: "Advanced",
+        description: "Learn computer vision with OpenCV, deep learning, and modern AI techniques."
       }
     ],
     "UX Design": [
@@ -156,6 +308,36 @@ const Courses = () => {
         duration: "13 hours",
         level: "Beginner",
         description: "Master UX/UI design principles and create stunning user interfaces."
+      },
+      {
+        title: "UI/UX Design Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/ui-ux-design",
+        rating: 4.6,
+        price: "$49/month",
+        duration: "6 months",
+        level: "Intermediate",
+        description: "Create digital user experiences that people love. Master Figma and design systems."
+      },
+      {
+        title: "Design Thinking Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/design-thinking-innovation",
+        rating: 4.7,
+        price: "$49/month",
+        duration: "5 months",
+        level: "Beginner",
+        description: "Learn design thinking from the University of Virginia. Master creative problem solving."
+      },
+      {
+        title: "Advanced UI/UX Design",
+        platform: "LinkedIn Learning",
+        url: "https://www.linkedin.com/learning/advanced-ui-ux-design",
+        rating: 4.8,
+        price: "$34.99",
+        duration: "8 hours",
+        level: "Advanced",
+        description: "Take your UI/UX skills to the next level with advanced design patterns and techniques."
       }
     ],
     "Cloud Computing": [
@@ -178,6 +360,36 @@ const Courses = () => {
         duration: "6 months",
         level: "Beginner",
         description: "Start your cloud computing career with Google Cloud Platform."
+      },
+      {
+        title: "Microsoft Azure Fundamentals",
+        platform: "Microsoft Learn",
+        url: "https://learn.microsoft.com/en-us/training/paths/az-900-describe-cloud-concepts/",
+        rating: 4.8,
+        price: "Free",
+        duration: "10 hours",
+        level: "Beginner",
+        description: "Learn Azure fundamentals and prepare for the AZ-900 certification."
+      },
+      {
+        title: "AWS DevOps Engineer Professional",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/aws-certified-devops-engineer-professional-hands-on/",
+        rating: 4.7,
+        price: "$89.99",
+        duration: "20 hours",
+        level: "Advanced",
+        description: "Master DevOps on AWS and prepare for the professional certification."
+      },
+      {
+        title: "Kubernetes for the Absolute Beginners",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/learn-kubernetes/",
+        rating: 4.6,
+        price: "$89.99",
+        duration: "5.5 hours",
+        level: "Beginner",
+        description: "Learn Kubernetes from scratch with hands-on labs and practice tests."
       }
     ],
     "Cybersecurity": [
@@ -200,28 +412,98 @@ const Courses = () => {
         duration: "8 months",
         level: "Beginner",
         description: "Start your career in cybersecurity with IBM's professional certificate."
+      },
+      {
+        title: "IBM Cybersecurity Analyst Professional Certificate",
+        platform: "Coursera",
+        url: "https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst",
+        rating: 4.7,
+        price: "$49/month",
+        duration: "8 months",
+        level: "Beginner",
+        description: "Get ready for a career in cybersecurity. Learn from industry experts at IBM."
+      },
+      {
+        title: "Ethical Hacking - The Complete Course",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/penetration-testing/",
+        rating: 4.6,
+        price: "$89.99",
+        duration: "25 hours",
+        level: "Intermediate",
+        description: "Learn ethical hacking, penetration testing, and network security from scratch."
+      },
+      {
+        title: "Certified Information Systems Security Professional (CISSP)",
+        platform: "LinkedIn Learning",
+        url: "https://www.linkedin.com/learning/cissp-cert-prep",
+        rating: 4.8,
+        price: "$34.99",
+        duration: "20 hours",
+        level: "Advanced",
+        description: "Prepare for the CISSP certification exam with comprehensive coverage of all domains."
+      },
+      {
+        title: "Cloud Security Engineering on AWS",
+        platform: "Coursera",
+        url: "https://www.coursera.org/learn/aws-cloud-security-engineering",
+        rating: 4.7,
+        price: "$49",
+        duration: "20 hours",
+        level: "Advanced",
+        description: "Master cloud security best practices and tools on Amazon Web Services."
       }
     ],
     "Product Management": [
       {
         title: "Digital Product Management Specialization",
         platform: "Coursera",
-        url: "https://www.coursera.org/specializations/digital-product-management",
-        rating: 4.6,
+        url: "https://www.coursera.org/specializations/uva-darden-digital-product-management",
+        rating: 4.7,
         price: "$49/month",
         duration: "5 months",
         level: "Intermediate",
-        description: "Learn modern product management practices and lead successful products."
+        description: "Learn modern product management techniques for digital products."
       },
       {
-        title: "Product Management A-Z",
-        platform: "Udemy",
-        url: "https://www.udemy.com/course/product-management-a-z/",
-        rating: 4.5,
-        price: "$84.99",
-        duration: "13.5 hours",
+        title: "Product Management: Building Great Products",
+        platform: "LinkedIn Learning",
+        url: "https://www.linkedin.com/learning/product-management-building-great-products",
+        rating: 4.6,
+        price: "$34.99",
+        duration: "2 hours",
         level: "Beginner",
-        description: "Complete product management course covering strategy to execution."
+        description: "Learn the fundamentals of product management and strategy."
+      },
+      {
+        title: "Become a Product Manager | Learn the Skills & Get the Job",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/",
+        rating: 4.5,
+        price: "$89.99",
+        duration: "13 hours",
+        level: "Beginner",
+        description: "The most complete product management course on Udemy. From PM fundamentals to job interviews."
+      },
+      {
+        title: "Product Management First Steps",
+        platform: "LinkedIn Learning",
+        url: "https://www.linkedin.com/learning/product-management-first-steps",
+        rating: 4.7,
+        price: "$34.99",
+        duration: "1.5 hours",
+        level: "Beginner",
+        description: "Learn the day-to-day responsibilities of a product manager and how to excel in the role."
+      },
+      {
+        title: "Agile Product Management",
+        platform: "Coursera",
+        url: "https://www.coursera.org/learn/uva-darden-agile-product-management",
+        rating: 4.8,
+        price: "$49",
+        duration: "4 weeks",
+        level: "Intermediate",
+        description: "Learn how to manage products using agile methodologies from the University of Virginia."
       }
     ],
     "Digital Marketing": [
@@ -233,7 +515,7 @@ const Courses = () => {
         price: "$49/month",
         duration: "8 months",
         level: "Beginner",
-        description: "Master digital marketing strategies, SEO, social media, and analytics."
+        description: "Master digital marketing strategy, social media, and SEO."
       },
       {
         title: "The Complete Digital Marketing Course",
@@ -241,9 +523,39 @@ const Courses = () => {
         url: "https://www.udemy.com/course/learn-digital-marketing-course/",
         rating: 4.5,
         price: "$84.99",
-        duration: "22.5 hours",
+        duration: "22 hours",
         level: "Beginner",
-        description: "12 courses in 1 - SEO, social media, email, ads, and content marketing."
+        description: "Learn SEO, Google Ads, social media marketing, and content marketing."
+      },
+      {
+        title: "Google Digital Marketing & E-commerce Professional Certificate",
+        platform: "Coursera",
+        url: "https://www.coursera.org/professional-certificates/google-digital-marketing-ecommerce",
+        rating: 4.8,
+        price: "$49/month",
+        duration: "6 months",
+        level: "Beginner",
+        description: "Get professional training designed by Google and earn an industry-recognized certification."
+      },
+      {
+        title: "Social Media Marketing Specialization",
+        platform: "Coursera",
+        url: "https://www.coursera.org/specializations/social-media-marketing",
+        rating: 4.6,
+        price: "$49/month",
+        duration: "5 months",
+        level: "Intermediate",
+        description: "Master social media marketing strategy across multiple platforms."
+      },
+      {
+        title: "SEO 2024: Complete SEO Training + SEO for WordPress",
+        platform: "Udemy",
+        url: "https://www.udemy.com/course/complete-seo-training/",
+        rating: 4.7,
+        price: "$89.99",
+        duration: "18 hours",
+        level: "All Levels",
+        description: "Learn modern SEO strategies, tools, and techniques to rank higher on Google."
       }
     ]
   };
