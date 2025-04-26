@@ -1,29 +1,13 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <span className="text-2xl font-bold text-purple-600">SkillSutra</span>
-            </div>
-            <div className="flex space-x-4">
-              <Link to="/auth/signin">
-                <Button variant="outline">Sign in</Button>
-              </Link>
-              <Link to="/auth/signup">
-                <Button className="bg-purple-600 hover:bg-purple-700">Get Started</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <div className="relative overflow-hidden">
