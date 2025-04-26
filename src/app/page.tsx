@@ -1,8 +1,21 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CareerChatbot } from "@/components/CareerChatbot";
+import { CareerQuiz } from "@/components/CareerQuiz";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function Home() {
+  const [showQuiz, setShowQuiz] = useState(false);
+
   return (
     <main className="min-h-screen p-8">
       <div className="container mx-auto max-w-6xl">
@@ -13,11 +26,22 @@ export default function Home() {
           </p>
           
           <div className="flex justify-center gap-4">
-            <Link href="/quiz">
-              <Button size="lg" className="gap-2">
-                🎯 Take Career Quiz
-              </Button>
-            </Link>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button size="lg" className="gap-2 text-lg px-8 py-6">
+                  🎯 Take Career Quiz
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Career Path Quiz</DialogTitle>
+                  <DialogDescription>
+                    Answer a few questions to discover your ideal career path in technology.
+                  </DialogDescription>
+                </DialogHeader>
+                <CareerQuiz />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
 
