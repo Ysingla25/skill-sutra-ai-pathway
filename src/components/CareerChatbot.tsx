@@ -9,39 +9,150 @@ interface Message {
   content: string;
 }
 
-const careerKnowledgeBase = {
-  "salary": "Salaries vary greatly by role, location, and experience. Entry-level tech roles typically start at $50-70k, while experienced professionals can earn $100k+. Senior roles and specialized positions can exceed $150k.",
-  "skills": "Key career skills include: technical expertise in your field, communication, problem-solving, adaptability, time management, and continuous learning. Soft skills are as important as technical skills.",
-  "education": "While formal education is valuable, many successful careers can be built through self-learning, bootcamps, or certifications. What matters most is your skills and portfolio.",
-  "interview": "Prepare for interviews by: researching the company, practicing common questions, preparing your own questions, showcasing your projects, and demonstrating both technical and soft skills.",
-  "growth": "Career growth comes from: continuous learning, taking on challenging projects, networking, mentorship, and staying updated with industry trends.",
-  "work-life": "Work-life balance varies by company and role. Many organizations offer flexible hours, remote work, and wellness programs. It's important to set boundaries and communicate your needs.",
-  "change": "Career changes are common. Key steps include: identifying transferable skills, learning new required skills, networking in your target field, and possibly starting with entry-level positions.",
-  "trends": "Current trending career fields include: AI/Machine Learning, Data Science, Cybersecurity, Cloud Computing, and Sustainable Technology. Stay updated with industry news and continuous learning."
+interface CareerInfo {
+  title: string;
+  description: string;
+  details: string[];
+  relatedTopics: string[];
+}
+
+const careerKnowledgeBase: Record<string, CareerInfo> = {
+  "salary": {
+    title: "Career Salaries and Compensation",
+    description: "Understanding salary ranges and compensation packages in different career paths",
+    details: [
+      "Entry-level tech roles typically start at $50-70k annually",
+      "Mid-level positions range from $80-120k based on experience and location",
+      "Senior roles and specialized positions can exceed $150-200k",
+      "Additional compensation often includes stock options, bonuses, and benefits",
+      "Remote work opportunities may offer location-independent salary scales"
+    ],
+    relatedTopics: ["negotiation", "benefits", "career-growth", "job-levels"]
+  },
+  "skills": {
+    title: "Essential Career Skills",
+    description: "Key skills needed for career success in today's professional landscape",
+    details: [
+      "Technical skills specific to your field (e.g., programming languages, tools)",
+      "Soft skills: communication, leadership, problem-solving, teamwork",
+      "Project management and organizational abilities",
+      "Adaptability and continuous learning mindset",
+      "Digital literacy and technology proficiency"
+    ],
+    relatedTopics: ["learning", "development", "certification", "training"]
+  },
+  "education": {
+    title: "Educational Pathways",
+    description: "Various educational routes to build a successful career",
+    details: [
+      "Traditional degrees: Bachelor's, Master's, Ph.D. programs",
+      "Professional certifications and industry-specific qualifications",
+      "Online learning platforms and MOOCs",
+      "Bootcamps and intensive training programs",
+      "Self-learning and practical experience building"
+    ],
+    relatedTopics: ["qualifications", "certifications", "training", "learning-path"]
+  },
+  "interview": {
+    title: "Interview Preparation",
+    description: "Comprehensive guide to ace job interviews",
+    details: [
+      "Research the company thoroughly: culture, products, recent news",
+      "Prepare STAR method responses for behavioral questions",
+      "Practice technical skills and coding challenges if applicable",
+      "Prepare thoughtful questions for the interviewer",
+      "Follow up professionally after the interview"
+    ],
+    relatedTopics: ["job-search", "resume", "negotiation", "career-change"]
+  },
+  "growth": {
+    title: "Career Growth and Development",
+    description: "Strategies for advancing your career",
+    details: [
+      "Set clear short-term and long-term career goals",
+      "Seek mentorship and networking opportunities",
+      "Take on challenging projects and leadership roles",
+      "Stay updated with industry trends and technologies",
+      "Build a strong professional network"
+    ],
+    relatedTopics: ["promotion", "leadership", "networking", "mentorship"]
+  },
+  "work-life": {
+    title: "Work-Life Balance",
+    description: "Managing professional and personal life effectively",
+    details: [
+      "Set clear boundaries between work and personal time",
+      "Utilize flexible work arrangements when available",
+      "Practice time management and prioritization",
+      "Take regular breaks and use vacation time",
+      "Maintain physical and mental well-being"
+    ],
+    relatedTopics: ["stress-management", "remote-work", "productivity", "health"]
+  },
+  "change": {
+    title: "Career Transition",
+    description: "Guide for successful career changes",
+    details: [
+      "Assess your transferable skills and interests",
+      "Research and network in your target industry",
+      "Develop new skills through courses or side projects",
+      "Update your resume and online presence",
+      "Consider starting with entry-level positions or internships"
+    ],
+    relatedTopics: ["skills", "education", "networking", "job-search"]
+  },
+  "trends": {
+    title: "Industry Trends",
+    description: "Current and emerging career opportunities",
+    details: [
+      "AI and Machine Learning continue rapid growth",
+      "Cybersecurity becomes increasingly critical",
+      "Remote work and digital transformation",
+      "Sustainability and green technology",
+      "Healthcare technology and telemedicine"
+    ],
+    relatedTopics: ["technology", "future-skills", "innovation", "job-market"]
+  },
+  "networking": {
+    title: "Professional Networking",
+    description: "Building and maintaining professional relationships",
+    details: [
+      "Attend industry events and conferences",
+      "Utilize professional social networks like LinkedIn",
+      "Join professional associations and communities",
+      "Contribute to discussions and share knowledge",
+      "Maintain regular contact with your network"
+    ],
+    relatedTopics: ["career-growth", "job-search", "mentorship", "personal-brand"]
+  }
 };
 
 const generateResponse = (question: string): string => {
   question = question.toLowerCase();
   
-  if (question.includes('salary') || question.includes('pay') || question.includes('earn')) {
-    return careerKnowledgeBase.salary;
-  } else if (question.includes('skill') || question.includes('learn')) {
-    return careerKnowledgeBase.skills;
-  } else if (question.includes('education') || question.includes('degree') || question.includes('study')) {
-    return careerKnowledgeBase.education;
-  } else if (question.includes('interview') || question.includes('hire')) {
-    return careerKnowledgeBase.interview;
-  } else if (question.includes('growth') || question.includes('advance') || question.includes('promotion')) {
-    return careerKnowledgeBase.growth;
-  } else if (question.includes('balance') || question.includes('work-life') || question.includes('stress')) {
-    return careerKnowledgeBase["work-life"];
-  } else if (question.includes('change') || question.includes('switch') || question.includes('transition')) {
-    return careerKnowledgeBase.change;
-  } else if (question.includes('trend') || question.includes('future') || question.includes('demand')) {
-    return careerKnowledgeBase.trends;
-  }
+  // Helper function to find the most relevant topic
+  const findRelevantTopic = (q: string): string | null => {
+    const topics = Object.keys(careerKnowledgeBase);
+    for (const topic of topics) {
+      const info = careerKnowledgeBase[topic];
+      // Check main topic keywords
+      if (q.includes(topic)) return topic;
+      // Check related topics
+      if (info.relatedTopics.some(rt => q.includes(rt))) return topic;
+    }
+    return null;
+  };
+
+  // Find the most relevant topic
+  const topic = findRelevantTopic(question);
   
-  return "I understand you're asking about careers. Could you please be more specific about what you'd like to know? You can ask about salaries, skills needed, education requirements, interview tips, career growth, work-life balance, career changes, or industry trends.";
+  if (topic) {
+    const info = careerKnowledgeBase[topic];
+    return `📌 ${info.title}\n\n${info.description}\n\n${info.details.map(d => `• ${d}`).join('\n')}\n\n💡 Related topics: ${info.relatedTopics.join(', ')}`;
+  }
+
+  // If no specific topic is found, provide a general response
+  return `I can help you with various career-related topics. You can ask about:\n\n${Object.values(careerKnowledgeBase).map(info => `• ${info.title}`).join('\n')}\n\nWhat would you like to know more about?`;
 };
 
 export const CareerChatbot = () => {
