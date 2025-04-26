@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { Book, Briefcase, Contact, Home, Users, FileText } from 'lucide-react';
+import { Logo } from './Logo';
 
 const Navbar = () => {
   return (
@@ -11,14 +11,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center space-x-2">
-            <img
-              src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=32&h=32"
-              alt="SkillSutra Logo"
-              className="h-8 w-8 rounded-full"
-            />
-            <Link to="/" className="text-2xl font-bold text-purple-600">SkillSutra</Link>
-          </div>
+          <Link to="/" className="flex-shrink-0">
+            <Logo size="sm" />
+          </Link>
           
           <NavigationMenu>
             <NavigationMenuList className="hidden md:flex">
