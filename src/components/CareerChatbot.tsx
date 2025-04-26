@@ -1,176 +1,200 @@
-import { useState } from "react";
+import { useState, useRef, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageCircle, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { MessageCircle, X, Send } from "lucide-react";
 
 interface Message {
   type: "user" | "bot";
   content: string;
 }
 
-interface CareerPath {
+interface CareerInfo {
   title: string;
   description: string;
-  requiredSkills: string[];
-  learningPath: string[];
-  estimatedTime: {
-    beginner: string;
-    intermediate: string;
-    advanced: string;
-  };
+  details: string[];
+  relatedTopics: string[];
 }
 
-const careerPaths: Record<string, CareerPath> = {
-  "Frontend Development": {
-    title: "Frontend Development",
-    description: "Create beautiful and interactive user interfaces",
-    requiredSkills: ["HTML", "CSS", "JavaScript", "React", "UI/UX Design"],
-    learningPath: [
-      "HTML & CSS Fundamentals",
-      "JavaScript Basics & Advanced Concepts",
-      "React.js Framework",
-      "UI/UX Design Principles",
-      "Web Performance Optimization"
+const careerKnowledgeBase: Record<string, CareerInfo> = {
+  "salary": {
+    title: "Career Salaries and Compensation",
+    description: "Understanding salary ranges and compensation packages in different career paths",
+    details: [
+      "Entry-level tech roles typically start at $50-70k annually",
+      "Mid-level positions range from $80-120k based on experience and location",
+      "Senior roles and specialized positions can exceed $150-200k",
+      "Additional compensation often includes stock options, bonuses, and benefits",
+      "Remote work opportunities may offer location-independent salary scales"
     ],
-    estimatedTime: {
-      beginner: "6-8 months",
-      intermediate: "4-6 months",
-      advanced: "2-3 months"
-    }
+    relatedTopics: ["negotiation", "benefits", "career-growth", "job-levels"]
   },
-  "Backend Development": {
-    title: "Backend Development",
-    description: "Build robust server-side applications and APIs",
-    requiredSkills: ["Node.js", "Databases", "API Design", "Server Management", "Security"],
-    learningPath: [
-      "Server-side Programming",
-      "Database Design & Management",
-      "RESTful API Development",
-      "Authentication & Authorization",
-      "Cloud Services & Deployment"
+  "skills": {
+    title: "Essential Career Skills",
+    description: "Key skills needed for career success in today's professional landscape",
+    details: [
+      "Technical skills specific to your field (e.g., programming languages, tools)",
+      "Soft skills: communication, leadership, problem-solving, teamwork",
+      "Project management and organizational abilities",
+      "Adaptability and continuous learning mindset",
+      "Digital literacy and technology proficiency"
     ],
-    estimatedTime: {
-      beginner: "8-10 months",
-      intermediate: "5-7 months",
-      advanced: "3-4 months"
-    }
+    relatedTopics: ["learning", "development", "certification", "training"]
   },
-  "Full Stack Development": {
-    title: "Full Stack Development",
-    description: "Master both frontend and backend development",
-    requiredSkills: ["Frontend Skills", "Backend Skills", "Database Management", "DevOps", "System Design"],
-    learningPath: [
-      "Frontend Development Basics",
-      "Backend Development Fundamentals",
-      "Database Integration",
-      "Full Stack Project Development",
-      "Deployment & DevOps"
+  "education": {
+    title: "Educational Pathways",
+    description: "Various educational routes to build a successful career",
+    details: [
+      "Traditional degrees: Bachelor's, Master's, Ph.D. programs",
+      "Professional certifications and industry-specific qualifications",
+      "Online learning platforms and MOOCs",
+      "Bootcamps and intensive training programs",
+      "Self-learning and practical experience building"
     ],
-    estimatedTime: {
-      beginner: "12-14 months",
-      intermediate: "8-10 months",
-      advanced: "5-6 months"
-    }
+    relatedTopics: ["qualifications", "certifications", "training", "learning-path"]
+  },
+  "interview": {
+    title: "Interview Preparation",
+    description: "Comprehensive guide to ace job interviews",
+    details: [
+      "Research the company thoroughly: culture, products, recent news",
+      "Prepare STAR method responses for behavioral questions",
+      "Practice technical skills and coding challenges if applicable",
+      "Prepare thoughtful questions for the interviewer",
+      "Follow up professionally after the interview"
+    ],
+    relatedTopics: ["job-search", "resume", "negotiation", "career-change"]
+  },
+  "growth": {
+    title: "Career Growth and Development",
+    description: "Strategies for advancing your career",
+    details: [
+      "Set clear short-term and long-term career goals",
+      "Seek mentorship and networking opportunities",
+      "Take on challenging projects and leadership roles",
+      "Stay updated with industry trends and technologies",
+      "Build a strong professional network"
+    ],
+    relatedTopics: ["promotion", "leadership", "networking", "mentorship"]
+  },
+  "work-life": {
+    title: "Work-Life Balance",
+    description: "Managing professional and personal life effectively",
+    details: [
+      "Set clear boundaries between work and personal time",
+      "Utilize flexible work arrangements when available",
+      "Practice time management and prioritization",
+      "Take regular breaks and use vacation time",
+      "Maintain physical and mental well-being"
+    ],
+    relatedTopics: ["stress-management", "remote-work", "productivity", "health"]
+  },
+  "change": {
+    title: "Career Transition",
+    description: "Guide for successful career changes",
+    details: [
+      "Assess your transferable skills and interests",
+      "Research and network in your target industry",
+      "Develop new skills through courses or side projects",
+      "Update your resume and online presence",
+      "Consider starting with entry-level positions or internships"
+    ],
+    relatedTopics: ["skills", "education", "networking", "job-search"]
+  },
+  "trends": {
+    title: "Industry Trends",
+    description: "Current and emerging career opportunities",
+    details: [
+      "AI and Machine Learning continue rapid growth",
+      "Cybersecurity becomes increasingly critical",
+      "Remote work and digital transformation",
+      "Sustainability and green technology",
+      "Healthcare technology and telemedicine"
+    ],
+    relatedTopics: ["technology", "future-skills", "innovation", "job-market"]
+  },
+  "networking": {
+    title: "Professional Networking",
+    description: "Building and maintaining professional relationships",
+    details: [
+      "Attend industry events and conferences",
+      "Utilize professional social networks like LinkedIn",
+      "Join professional associations and communities",
+      "Contribute to discussions and share knowledge",
+      "Maintain regular contact with your network"
+    ],
+    relatedTopics: ["career-growth", "job-search", "mentorship", "personal-brand"]
   }
 };
 
-const questions = [
-  {
-    id: 1,
-    question: "What interests you more?",
-    options: ["Frontend Development", "Backend Development", "Full Stack Development"],
-    followUp: "Great choice! Frontend development focuses on creating user interfaces that users love to interact with."
-  },
-  {
-    id: 2,
-    question: "What is your current experience level?",
-    options: ["Beginner", "Intermediate", "Advanced"],
-    followUp: "Understanding your experience level helps us tailor the perfect learning path for you."
-  },
-  {
-    id: 3,
-    question: "How much time can you dedicate to learning?",
-    options: ["2-4 hours/day", "4-6 hours/day", "6+ hours/day"],
-    followUp: "Consistent learning is key to success in tech. We'll adjust the pace accordingly."
-  },
-  {
-    id: 4,
-    question: "What's your primary motivation for learning?",
-    options: ["Career Change", "Skill Enhancement", "Personal Interest"],
-    followUp: "Understanding your goals helps us provide more relevant guidance."
+const generateResponse = (question: string): string => {
+  question = question.toLowerCase();
+  
+  // Helper function to find the most relevant topic
+  const findRelevantTopic = (q: string): string | null => {
+    const topics = Object.keys(careerKnowledgeBase);
+    for (const topic of topics) {
+      const info = careerKnowledgeBase[topic];
+      // Check main topic keywords
+      if (q.includes(topic)) return topic;
+      // Check related topics
+      if (info.relatedTopics.some(rt => q.includes(rt))) return topic;
+    }
+    return null;
+  };
+
+  // Find the most relevant topic
+  const topic = findRelevantTopic(question);
+  
+  if (topic) {
+    const info = careerKnowledgeBase[topic];
+    return `📌 ${info.title}\n\n${info.description}\n\n${info.details.map(d => `• ${d}`).join('\n')}\n\n💡 Related topics: ${info.relatedTopics.join(', ')}`;
   }
-];
+
+  // If no specific topic is found, provide a general response
+  return `I can help you with various career-related topics. You can ask about:\n\n${Object.values(careerKnowledgeBase).map(info => `• ${info.title}`).join('\n')}\n\nWhat would you like to know more about?`;
+};
 
 export const CareerChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [messages, setMessages] = useState<Message[]>([
-    { type: "bot", content: "Hi! I'm here to help you find your ideal career path. Ready to start?" },
+    { type: "bot", content: "Hi! I'm your career advisor. Ask me anything about careers, jobs, skills, or professional growth!" },
   ]);
+  const [inputValue, setInputValue] = useState("");
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleOptionClick = (option: string) => {
-    // Add user's response
-    setMessages((prev) => [...prev, { type: "user", content: option }]);
+  const handleSendMessage = () => {
+    if (!inputValue.trim()) return;
 
-    // Add bot's next question or conclusion
+    // Add user's message
+    const userMessage = { type: "user" as const, content: inputValue };
+    setMessages(prev => [...prev, userMessage]);
+
+    // Generate and add bot's response
+    const botResponse = generateResponse(inputValue);
     setTimeout(() => {
-      if (currentQuestion < questions.length - 1) {
-        setMessages((prev) => [
-          ...prev,
-          { type: "bot", content: questions[currentQuestion + 1].question },
-        ]);
-        setCurrentQuestion((prev) => prev + 1);
-      } else {
-        // Final recommendation
-        const recommendation = generateRecommendation(
-          messages.filter((m) => m.type === "user").map((m) => m.content)
-        );
-        setMessages((prev) => [...prev, { type: "bot", content: recommendation }]);
+      setMessages(prev => [...prev, { type: "bot", content: botResponse }]);
+      
+      // Scroll to bottom
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
       }
     }, 500);
+
+    setInputValue("");
   };
 
-  const generateRecommendation = (answers: string[]) => {
-    const [interest, level, time, motivation] = answers;
-    const careerPath = careerPaths[interest];
-    const timeCommitment = time.split('-')[0];
-    const hoursPerWeek = parseInt(timeCommitment) * 5; // Assuming 5 days/week
-
-    let completionTime = careerPath.estimatedTime[level.toLowerCase() as keyof typeof careerPath.estimatedTime];
-    
-    // Adjust completion time based on daily commitment
-    if (time === "6+ hours/day") {
-      completionTime = completionTime.split('-')[0] + " (accelerated)";
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
     }
-
-    return `Based on your responses, here's your personalized career path in ${interest}:
-
-🎯 Career Focus: ${careerPath.description}
-
-📚 Required Skills:
-${careerPath.requiredSkills.map(skill => `• ${skill}`).join('\n')}
-
-🛣️ Your Learning Path:
-${careerPath.learningPath.map((step, index) => `${index + 1}. ${step}`).join('\n')}
-
-⏱️ Estimated Completion Time: ${completionTime}
-(Based on ${time} commitment, ${hoursPerWeek}+ hours/week)
-
-💡 Additional Tips:
-• ${motivation === 'Career Change' ? 'Focus on building a strong portfolio of projects' : 
-    motivation === 'Skill Enhancement' ? 'Consider specializing in advanced topics in your area' : 
-    'Explore side projects that interest you'}
-• Join our community to connect with other learners
-• Regular practice and real-world projects are key to success
-
-Ready to start? Check out our courses page for structured learning paths!`;
   };
 
   const resetChat = () => {
-    setCurrentQuestion(0);
     setMessages([
-      { type: "bot", content: "Hi! I'm here to help you find your ideal career path. Ready to start?" },
+      { type: "bot", content: "Hi! I'm your career advisor. Ask me anything about careers, jobs, skills, or professional growth!" },
     ]);
+    setInputValue("");
   };
 
   return (
@@ -194,7 +218,7 @@ Ready to start? Check out our courses page for structured learning paths!`;
             </Button>
           </div>
           <CardContent className="p-4 overflow-hidden flex flex-col h-[500px]">
-            <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 scrollbar-thin">
+            <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 scrollbar-thin" ref={chatContainerRef}>
               {messages.map((message, index) => (
                 <div
                   key={index}
@@ -213,28 +237,28 @@ Ready to start? Check out our courses page for structured learning paths!`;
               ))}
             </div>
 
-            {/* Options */}
-            {currentQuestion < questions.length && messages[messages.length - 1].type === "bot" && (
-                <div className="space-y-2 sticky bottom-0 bg-background pt-2 border-t">
-                  {questions[currentQuestion].options.map((option) => (
-                    <Button
-                      key={option}
-                      variant="outline"
-                      className="w-full justify-start text-sm py-2 px-3 h-auto whitespace-normal text-left"
-                      onClick={() => handleOptionClick(option)}
-                    >
-                      {option}
-                    </Button>
-                  ))}
-                </div>
-              )}
+            {/* Input area */}
+            <div className="flex items-center gap-2 sticky bottom-0 bg-background pt-2 border-t">
+              <Input
+                placeholder="Ask me anything about careers..."
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className="flex-1"
+              />
+              <Button
+                size="icon"
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim()}
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
 
             {/* Reset button */}
-            {currentQuestion >= questions.length && (
-              <Button className="w-full mt-4" onClick={resetChat}>
-                Start Over
-              </Button>
-            )}
+            <Button className="w-full mt-4" onClick={resetChat}>
+              Start Over
+            </Button>
           </CardContent>
         </Card>
       )}
