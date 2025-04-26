@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import { Graduation, Target, Users, Briefcase, Chart, BookOpen } from 'lucide-react';
+import { GraduationCap, Target, Users, Briefcase, ChartBar, BookOpen } from 'lucide-react';
 
 const Features = () => {
   return (
@@ -20,7 +20,7 @@ const Features = () => {
           <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
             <div className="flex items-center mb-4">
               <div className="p-3 bg-purple-100 rounded-lg">
-                <Graduation className="h-6 w-6 text-purple-600" />
+                <GraduationCap className="h-6 w-6 text-purple-600" />
               </div>
               <h2 className="text-xl font-semibold text-purple-600 ml-4">Personalized Learning Paths</h2>
             </div>
@@ -72,7 +72,7 @@ const Features = () => {
           <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
             <div className="flex items-center mb-4">
               <div className="p-3 bg-purple-100 rounded-lg">
-                <Chart className="h-6 w-6 text-purple-600" />
+                <ChartBar className="h-6 w-6 text-purple-600" />
               </div>
               <h2 className="text-xl font-semibold text-purple-600 ml-4">Progress Tracking</h2>
             </div>
@@ -100,4 +100,3 @@ const Features = () => {
 };
 
 export default Features;
-
